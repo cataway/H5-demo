@@ -90,10 +90,10 @@
                 }
              lis[i].className = "";
             }
-            if(changePos>0){/*↓*/
+            if(changePos>0){/*向下滑↓*/
                 this.prevSIndex = num = cur == 0?cur = lis.length-1: cur-1
                 lis[num].style.transform="translate(0,"+(-winH+changePos)+"px)";
-            }else if(changePos<0){ /*↑*/
+            }else if(changePos<0){ /*向上滑↑*/
                 this.prevSIndex  = num = cur ==lis.length -1 ? 0 :cur+1;
                 lis[num].style.transform="translate(0,"+(winH+changePos)+"px)";
             }
