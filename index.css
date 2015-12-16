@@ -67,7 +67,6 @@ html,body{
     transform: translate(0 ,0);
     transition:.5s
 }
-
 .a2 p {
     width: 90px;
     height: 90px;
@@ -130,7 +129,6 @@ html,body{
     bottom:10%;
     background: url(images/d1.png) no-repeat center 0;
     height: 222px;
-
 }
 #a3{
     -webkit-animation:move 0.4s linear;
