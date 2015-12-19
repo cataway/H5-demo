@@ -1,128 +1,55 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale = 1.0,user-scalable=no">
     <title></title>
     <link rel="stylesheet" href="index.css"/>
-
-    <!--设备像素(安卓设备dp,ios是ppi)和逻辑像素
-    设备像素比 = 设备像素/逻辑像素 =2
-    逻辑像素 = 设备像素比的平方个设备像素
-    -->
 </head>
 <body>
-    <div id="main">
-        <ul id="list">
-            <li >
-                <div class="a1" >
-                    <div>
-                        <p>曾经做为前端开发的你</p>
-                        <p>解决PC兼容性而焦头烂额</p>
-                    </div>
-                    <div>
-                        <p>而今</p>
-                        <p>移动端H5应用疯狂来袭</p>
-                    </div>
-                    <div>
-                        <p>你是否已准备充分</p>
-                        <p>学习新技能</p>
-                    </div>
-                    <div>
-                        <p>曾破茧成蝶、重获新生？</p>
-                    </div>
-                </div>
-            </li>
-            <li >
-                <div class="a2">
-                    <p></p>
-                    <p></p>
-                    <p></p>
-                    <p></p>
-                    <p></p>
-                    <p></p>
-                </div>
-            </li>
-            <li >
-                <div class="a3"></div>
-            </li>
-            <li class="zIndex">
-                <div class="a4">
-                    <p>transform  transition  rotate  scale  translate  keyframes animation  webkitTransitionEnd webkitAnimationIteration elapsedTime perspective…</p>
-                    <p>drawImage lineWidth  strokeStyle  lineCap  globalCompositeOperation  moveTo   lineTo  stroke  arc  getImageData…</p>
-                    <p>audio autoplay loop  paused  play  pause…</p>
-                </div>
-            </li>
-        </ul>
-    </div>
+<div id="main">
+    <ul class="slide">
+        <li class="zIndex">
+            <div class="a1">
+                <p>曾今作为前端开发的你<br>解决PC兼容性而焦头烂额</p>
+                <p>
+                    而今<br>移动端h5应用疯狂来袭
+                </p>
+                <p>
+                    你是否已准备充分学习新技能
+                </p>
+                <p>曾破茧成蝶,重获新生?</p>
+            </div>
+        </li>
+        <li>
+            <div class="a2">
+                <p></p>
+
+                <p></p>
+
+                <p></p>
+
+                <p></p>
+
+                <p></p>
+
+                <p></p>
+            </div>
+        </li>
+        <li>
+            <div class="a3"></div>
+        </li>
+        <li>
+            <div class="a4">
+                <p>transform translate sclae rotate animation keyframes skew ransform-origin transform-preserve perspetive</p>
+
+                <p>transform translate sclae rotate animation keyframes skew ransform-origin transform-preserve perspetive</p>
+
+                <p>transform translate sclae rotate animation keyframes skew ransform-origin transform-preserve perspetive</p>
+            </div>
+        </li>
+    </ul>
+</div>
+<script src="index.js"></script>
 </body>
 </html>
-<script language="javascript">
-
-        var winW = document.documentElement.clientWidth;
-        var winH = document.documentElement.clientHeight;
-        var main = document.querySelector('#main');
-        var desW = 640;
-        var desH = 960;
-        main.style.transform = "scale("+winH/desH+")";
-        var lis = document.querySelector('#list').getElementsByTagName('li');
-        for(var i = 0; i<lis.length;i++){
-            lis[i].index = i;
-            lis[i].addEventListener('touchstart',start,false);
-            lis[i].addEventListener('touchmove',move,false);
-            lis[i].addEventListener('touchend',end,false);
-        }
-        function start(e) {
-            var touch = e.changedTouches[0];
-            this.startTouchY = touch.pageY;
-
-        }
-        function move(e){
-            this.flag = true;
-            var touch = e.changedTouches[0];
-            var moveTouchY= touch.pageY;
-            var changePos = moveTouchY - this.startTouchY;
-            var cur = this.index;
-            var num = 0;
-            for(var i = 0;i<lis.length;i++){
-                if(i!=cur){
-                    lis[i].style.display = "none";
-                }
-             lis[i].className = "";
-            }
-            if(changePos>0){/*向下滑↓*/
-                this.prevSIndex = num = cur == 0?cur = lis.length-1: cur-1
-                lis[num].style.transform="translate(0,"+(-winH+changePos)+"px)";
-            }else if(changePos<0){ /*向上滑↑*/
-                this.prevSIndex  = num = cur ==lis.length -1 ? 0 :cur+1;
-                lis[num].style.transform="translate(0,"+(winH+changePos)+"px)";
-            }
-            lis[num].className="zIndex";
-            lis[num].style.display="block";
-            var scalePos  =1-Math.abs(changePos)/winH*1/2;
-           this.style.transform = "translate(0,"+changePos*1/2+"px) scale("+scalePos+")";
-        }
-
-        function end(e){
-            if(this.flag){
-                var touch = e.changedTouches[0];
-                var endTouchY= touch.pageY;
-                var changePos = endTouchY - this.startTouchY;
-                this.style.transform = "translate("+changePos*1/2+")";
-                lis[this.prevSIndex].style.transform = "translate(0,0)";
-                lis[this.prevSIndex].style.transition = "all  0.5s";
-                lis[this.prevSIndex].addEventListener('transitionend',transitionEnd,false)
-                this.firstElementChild.id ="";
-            }
-            }
-
-        function transitionEnd(e){
-            if(e.target.tagName = "Li"){
-                this.style.transition  = "";
-                this.firstElementChild.id = "a"+(this.index+1);
-            }
-        }
-
-    document.addEventListener('touchmove',function(e){
-    },false)
-</script>
